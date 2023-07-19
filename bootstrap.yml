@@ -1,0 +1,28 @@
+- name: Bootstrap Fedora Workstation box
+  hosts: localhost
+
+  tasks:
+  - name: Install packages with dnf
+    become: yes
+    ansible.builtin.dnf:
+      name:
+        - git
+        - tmux
+        - neovim
+        - gnome-console
+      state: present
+
+  - name: Add Fedora flatpak
+    community.general.flatpak_remote:
+      name: fedora
+      method: user
+      flatpakrepo_url: oci+https://registry.fedoraproject.org
+      state: present
+
+  - name: Install Flatpaks
+    community.general.flatpak:
+      method: user
+      remote: fedora
+      name:
+        - org.inkscape.Inkscape
+      state: present
