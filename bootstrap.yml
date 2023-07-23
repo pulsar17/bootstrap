@@ -11,6 +11,7 @@
         - neovim
         - gnome-console
         - xxd
+        - python3-psutil # required for configuring Gnome settings
       state: present
 
   - name: Add Fedora flatpak
@@ -27,3 +28,6 @@
       name:
         - org.inkscape.Inkscape
       state: present
+
+  - ansible.builtin.include_tasks:
+      file: gnome.yml
