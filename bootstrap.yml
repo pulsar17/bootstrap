@@ -10,6 +10,7 @@
         - tmux
         - neovim
         - gnome-console
+        - xxd
       state: present
 
   - name: Add Fedora flatpak
