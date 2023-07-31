@@ -12,6 +12,7 @@
         - gnome-console
         - xxd
         - python3-psutil # required for configuring Gnome settings
+        - gcc
       state: present
 
   - name: Add Fedora flatpak
