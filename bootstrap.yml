@@ -1,5 +1,7 @@
 - name: Bootstrap Fedora Workstation box
   hosts: localhost
+  vars:
+    projects_dir: "{{ lookup('env','HOME') }}/Projects/"
 
   tasks:
   - name: Install packages with dnf
@@ -32,3 +34,14 @@
 
   - ansible.builtin.include_tasks:
       file: gnome.yml
+
+  - name: Clone all repos
+    ansible.builtin.git:
+      repo: "git@github.com:{{ item.owner }}/{{ item.repo_name }}.git"
+      dest: "{{ projects_dir }}/{{ item.repo_name }}"
+      clone: yes
+      update: yes
+    with_items:
+      - { owner: pulsar17, repo_name: bootstrap }
+      - { owner: pulsar17, repo_name: dotfiles }
+      - { owner: pulsar17, repo_name: blog }
