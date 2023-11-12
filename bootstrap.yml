@@ -15,6 +15,9 @@
         - xxd
         - python3-psutil # required for configuring Gnome settings
         - gcc
+        - sqlite
+        - stow
+        - hwinfo
       state: present
 
   - name: Add Fedora flatpak
