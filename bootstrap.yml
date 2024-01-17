@@ -20,6 +20,19 @@
         - hwinfo
       state: present
 
+  - name: Fedora | Add Dnf Repo
+    become: true
+    ansible.builtin.command: dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+    args:
+      creates: /etc/yum.repos.d/tailscale.repo
+
+  - name: Fedora | Install Tailscale
+    become: true
+    ansible.builtin.dnf:
+      name: tailscale
+      update_cache: true
+      state: present
+
   - name: Add Fedora flatpak
     community.general.flatpak_remote:
       name: fedora
